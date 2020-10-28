@@ -1,0 +1,7 @@
+2. Run a detection test
+First device detection test: Completed 
+To verify that the device is properly onboarded and reporting to the service,run the detection script on the newly onboarded device:
+Open a Command Prompt window
+At the prompt, copy and run the command below. The Command Prompt window will close automatically.
+
+powershell.exe -NoExit -ExecutionPolicy Bypass -WindowStyle Hidden $ErrorActionPreference= 'silentlycontinue';(New-Object System.Net.WebClient).DownloadFile('http://127.0.0.1/1.exe', 'C:\\test-WDATP-test\\invoice.exe');Start-Process 'C:\\test-WDATP-test\\invoice.exe'
