@@ -1,3 +1,21 @@
+#/microsoft/Microsoft-365-Defender-Hunting-Queries
+https://github.com/microsoft/Microsoft-365-Defender-Hunting-Queries
+
+#/microsoft/microsoft-defender-atp-manageability
+https://github.com/microsoft/microsoft-defender-atp-manageability
+
+#/microsoft/MicrosoftDefenderATP-PowerBI
+https://github.com/microsoft/MicrosoftDefenderATP-PowerBI
+
+#/microsoft/mdatp-xplat
+https://github.com/microsoft/mdatp-xplat
+
+#/microsoft/MicrosoftDefenderATP-API-Python
+https://github.com/microsoft/MicrosoftDefenderATP-API-Python
+
+#/microsoft/MicrosoftDefenderATP-API-PowerShell
+https://github.com/microsoft/MicrosoftDefenderATP-API-PowerShell
+
 #Live Response scripts
 https://github.com/MDATP/LiveResponse
 
@@ -12,3 +30,4 @@ https://github.com/MDATP/SIEM-Integration
 
 #API
 https://github.com/MDATP/API
+
