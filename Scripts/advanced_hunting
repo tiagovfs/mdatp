@@ -37,3 +37,16 @@ FileName, ProcessCommandLine, RemoteIP, RemoteUrl, RemotePort, RemoteIPType
     
     
     
+#Check which devices are involved in high severity alerts
+// Search for devices with High active alerts or Critical CVE public exploit
+DeviceTvmSoftwareInventoryVulnerabilities
+| join kind=inner(DeviceTvmSoftwareVulnerabilitiesKB) on CveId
+| where IsExploitAvailable == 1 and CvssScore >= 7
+| summarize NumOfVulnerabilities=dcount(CveId),
+DeviceName=any(DeviceName) by DeviceId
+| join kind =inner(DeviceAlertEvents) on DeviceId  
+| summarize NumOfVulnerabilities=any(NumOfVulnerabilities),
+DeviceName=any(DeviceName) by DeviceId, AlertId
+| project DeviceName, NumOfVulnerabilities, AlertId  
+| order by NumOfVulnerabilities desc
+
