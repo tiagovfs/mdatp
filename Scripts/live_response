@@ -1,0 +1,178 @@
+Live response commands
+
+The following commands are available for user roles that are granted the ability to run basic live response commands. For more information on role assignments, see Create and manage roles.
+
+BASIC COMMANDS
+Command	Description
+cd	Changes the current directory.
+cls	Clears the console screen.
+connect	Initiates a live response session to the device.
+connections	Shows all the active connections.
+dir	Shows a list of files and subdirectories in a directory.
+download <file_path> &	Downloads a file in the background.
+drivers	Shows all drivers installed on the device.
+fg <command ID>	Returns a file download to the foreground.
+fileinfo	Get information about a file.
+findfile	Locates files by a given name on the device.
+help	Provides help information for live response commands.
+persistence	Shows all known persistence methods on the device.
+processes	Shows all processes running on the device.
+registry	Shows registry values.
+scheduledtasks	Shows all scheduled tasks on the device.
+services	Shows all services on the device.
+trace	Sets the terminal's logging mode to debug.
+Advanced commands
+The following commands are available for user roles that are granted the ability to run advanced live response commands. For more information on role assignments, see Create and manage roles.
+
+ADVANCED COMMANDS
+Command	Description
+analyze	Analyses the entity with various incrimination engines to reach a verdict.
+getfile	Gets a file from the device.
+NOTE: This command has a prerequisite command. You can use the -auto command in conjunction with getfile to automatically run the prerequisite command.
+run	Runs a PowerShell script from the library on the device.
+library	Lists files that were uploaded to the live response library.
+putfile	Puts a file from the library to the device. Files are saved in a working folder and are deleted when the device restarts by default.
+remediate	Remediates an entity on the device. The remediation action will vary depending on the entity type:
+- File: delete
+- Process: stop, delete image file
+- Service: stop, delete image file
+- Registry entry: delete
+- Scheduled task: remove
+- Startup folder item: delete file
+NOTE: This command has a prerequisite command. You can use the -auto command in conjunction with remediate to automatically run the prerequisite command.
+undo	Restores an entity that was remediated.
+
+
+
+# Analyze the file malware.txt
+analyze file c:\Users\user\Desktop\malware.txt
+
+
+# Analyze the process by PID
+analyze process 1234
+
+# List active connections in json format using parameter name
+connections -output json
+
+# List active connections in json format without parameter name
+connections json
+
+# List files and sub-folders in the current folder
+dir
+
+
+# List files and sub-folders in a specific folder
+dir C:\Users\user\Desktop\
+
+
+# List files and subfolders in the current folder in json format
+dir -output json
+
+fileinfo
+
+
+# Display information about a file
+fileinfo C:\Windows\notepad.exe
+findfile
+
+
+# Find file by name
+findfile test.txt
+getfile
+
+
+# Download a file from a machine
+getfile c:\Users\user\Desktop\work.txt
+
+
+# Download a file from a machine, automatically run prerequisite commands
+getfile c:\Users\user\Desktop\work.txt -auto
+
+
+processes
+
+
+# Show all processes
+processes
+
+
+# Get process by pid
+processes 123
+
+
+# Get process by pid with argument name
+processes -pid 123
+
+Copy
+# Get process by name
+processes -name notepad.exe
+putfile
+
+
+# Upload file from library
+putfile get-process-by-name.ps1
+
+
+# Upload file from library, overwrite file if it exists
+putfile get-process-by-name.ps1 -overwrite
+
+
+# Upload file from library, keep it on the machine after a restart
+putfile get-process-by-name.ps1 -keep
+registry
+
+
+# Show information about the values in a registry key
+registry HKEY_CURRENT_USER\Console
+
+
+# Show information about a specific registry value
+registry HKEY_CURRENT_USER\Console\ScreenBufferSize
+remediate
+
+
+# Remediate file in specific path
+remediate file c:\Users\user\Desktop\malware.exe
+
+
+# Remediate process with specific PID
+remediate process 7960
+
+
+# See list of all remediated entities
+remediate list
+run
+
+
+# Run PowerShell script from the library without arguments
+run script.ps1
+
+
+# Run PowerShell script from the library with arguments
+run get-process-by-name.ps1 -parameters "-processName Registry"
+scheduledtask
+
+
+# Get all scheduled tasks
+scheduledtasks
+
+
+# Get specific scheduled task by location and name
+scheduledtasks Microsoft\Windows\Subscription\LicenseAcquisition
+
+
+# Get specific scheduled task by location and name with spacing
+scheduledtasks "Microsoft\Configuration Manager\Configuration Manager Health Evaluation"
+undo
+
+
+# Restore remediated registry
+undo registry HKEY_CURRENT_USER\Console\ScreenBufferSize
+
+
+# Restore remediated scheduledtask
+undo scheduledtask Microsoft\Windows\Subscription\LicenseAcquisition
+
+
+# Restore remediated file
+undo file c:\Users\user\Desktop\malware.exe
