@@ -31,3 +31,5 @@ https://github.com/MDATP/SIEM-Integration
 #API
 https://github.com/MDATP/API
 
+#Enable SIEM integration in Microsoft Defender ATP
+https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/enable-siem-integration
