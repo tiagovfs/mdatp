@@ -1,0 +1,39 @@
+Try your first query
+In Microsoft Defender Security Center, go to Advanced hunting to run your first query. Use the following example:
+
+// Finds PowerShell execution events that could involve a download
+union DeviceProcessEvents, DeviceNetworkEvents
+| where Timestamp > ago(7d)
+// Pivoting on PowerShell processes
+| where FileName in~ ("powershell.exe", "powershell_ise.exe")
+// Suspicious commands
+| where ProcessCommandLine has_any("WebClient",
+    "DownloadFile",
+    "DownloadData",
+    "DownloadString",
+    "WebRequest",
+    "Shellcode",
+    "http",
+    "https")
+| project Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, 
+FileName, ProcessCommandLine, RemoteIP, RemoteUrl, RemotePort, RemoteIPType
+| top 100 by Timestamp
+
+
+#Check specific processes
+// Pivoting on PowerShell processes
+| where FileName in~ ("powershell.exe", "powershell_ise.exe")
+
+#Search for specific command strings
+// Suspicious commands
+| where ProcessCommandLine has_any("WebClient",
+    "DownloadFile",
+    "DownloadData",
+    "DownloadString",
+    "WebRequest",
+    "Shellcode",
+    "http",
+    "https")
+    
+    
+    
